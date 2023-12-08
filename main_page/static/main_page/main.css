@@ -1,0 +1,74 @@
+html {
+    background-color: rgb(151, 145, 145);
+}
+
+.main {
+    font-size: 25px;
+    margin-bottom: -5px;
+    text-align: center;
+    border: solid 1.6px rgb(0, 0, 0);
+    border-radius: 9px;
+    color: white;
+    margin-right: 2%;
+    margin-left: 0%;
+}
+
+.main_head {
+    padding-top: 0%;
+    margin-top: 0%;
+    display: flex;
+    flex-flow: column;
+    float: left;
+    border-radius: 10px;
+    width: 20%;
+    height: 1000vh;
+    border-right: 3px solid #000;
+    border-bottom: 3px solid #000;
+    box-sizing: border-box;
+    position: fixed;
+}
+
+.searchbar {
+    transform: translate(100%, 0px);
+    width: 35%;
+    height: 2.5em;
+    position: sticky;
+    top: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.search-bar {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    border: 3px solid #000;
+    font: 3em sans-serif;
+}
+
+.btn-search {
+    z-index: 9;
+    transform: translate(830%, 10px);
+    margin: 0;
+    border-radius: 19%;
+    height: 2.4em;
+    border: solid 2.3px;
+    font: 13.4px sans-serif;
+}
+
+.selector {
+    border: rgb(0, 0, 0) solid 3px;
+    border-radius: 10px;
+    width: 15%;
+    height: 5%;
+    position: fixed;
+    font: 1.5em sans-serif;
+    right: 14%;
+    top: 2%;
+}
+
+.btn-register {
+    right: 1%;
+    top: 38%;
+}

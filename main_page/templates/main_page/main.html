@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'main_page/main.css' %}">
+    <title>E-Store</title>
+</head>
+<body>
+    <aside class = "main_head">
+        <a href=""><img src="{% static 'img/logo.png' %}" width="80%" alt="" style="margin-left: 7%; border-bottom: solid 3px"></a>
+        <h1 class = "main" style = 'border: none; margin-top: 3%; margin-bottom: 10%; '>E-Store</h1>
+        <a href="main.com"><p class = "main">Home</p></a>
+        <br>
+        <a href="items.com"><p class = "main" >Products</p></a>
+        <br>
+        <a href="categories.com"><p class = "main">Categories</p></a>
+        <br>
+        <a href="about_us.com"><p class = "main">About us</p></a>
+    </aside>
+    <div class="searchbar">
+        <input type="value" placeholder="Search.." class="search-bar">
+        <button class="btn-search" id="search" onclick="define()">Search</button>
+    </div>
+    <select class="selector" id="sort-by" name="sort">
+        <option value="name-ascend">Name (ascending)</option>
+        <option value="name-descend">Name (descending)</option>
+        <option value="price-ascend">Price (ascending)</option>
+        <option value="price-descend">Price (ascending)</option>
+    </select>
+    <a href="register.com">
+        <img src="{% static 'img/register.png' %}" alt="Register" class="btn-register">
+    </a>
+    {% block content %}
+    {% endblock %}
+    {% comment %} <footer>
+        <div class="footer-content">
+            <p>Contact us at: your_email@example.com</p>
+            <p>Follow us on social media: <a href="#">Facebook</a>, <a href="#">Twitter</a>, <a href="#">Instagram</a></p>
+        </div>
+    </footer> {% endcomment %}
+    <script type="text/javascript">
+        function define() {
+            console.log("Working...");
+        }
+    </script>
+</body>
+</html>
