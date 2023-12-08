@@ -10,19 +10,16 @@ class User(models.Model):
     password = models.CharField(max_length=30)
     phone = models.CharField(max_length=20, null=True)
     date_of_birth = models.DateField(null=True)
-    address = models.ForeignKey('Address', blank=True, on_delete=models.SET_NULL, null=True)
+    country = models.CharField(max_length=30, blank=True, null=True)
+    city = models.CharField(max_length=30, blank=True, null=True)
+    street = models.CharField(max_length=30, blank=True, null=True)
+    house = models.CharField(max_length=30, blank=True, null=True)
+    apartment = models.CharField(max_length=30, blank=True, null=True)
     registered_on = models.DateField(auto_now_add=True)
+    def show_address(self):
+        return f"{self.country}, {self.city}, {self.street}, {self.house}{f', {self.apartment}' if self.apartment else ''}"
     def __str__(self):
         return self.username
-
-class Address(models.Model):
-    country = models.CharField(max_length=30)
-    city = models.CharField(max_length=30)
-    street = models.CharField(max_length=30)
-    house = models.CharField(max_length=30)
-    apartment = models.CharField(max_length=30, blank=True, null=True)
-    def __str__(self):
-        return f"{self.country}, {self.city}, {self.street}, {self.house}{f', {self.apartment}' if self.apartment else ''}"
 
 class Product(models.Model):
     seller = models.ForeignKey('Seller', on_delete=models.CASCADE, related_name="Products")
@@ -70,11 +67,17 @@ class ProductReviewComments(models.Model):
     likes = models.IntegerField(default=0)
 
 class Seller(models.Model):
-    username = models.CharField(max_length=30)
-    addresses = models.ManyToManyField('Address', blank=True, related_name="SellerAddresses")
+    name = models.CharField(max_length=30)
+    addresses = models.ManyToManyField('Address', related_name="SellerAddresses")
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     reviews = models.ManyToManyField(ProductReviews, related_name='Seller')
     date_of_birth = models.DateField()
     def __str__(self):
-        return self.username
+        return self.user
+
+class Address(models.Model):
+    country = models.CharField(max_length=30)
+    city = models.CharField(max_length=30)
+    street = models.CharField(max_length=30)
+    house = models.CharField(max_length=30)
