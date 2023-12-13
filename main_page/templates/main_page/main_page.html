@@ -1,8 +1,15 @@
 {% extends 'main_page/main.html' %}
 {% block content %}
 <div class="content">
-    <table class="table table-content" id="content-splitting">
-        
-    </table>
+    {% for product in products %}
+    <a href="products/{{ product.id }}" style='text-decoration: none;'>
+        <div class = "product-content">
+            <img src="{{ product.photo.url }}" alt="{{ product.name }} Photo" class="product-photo">
+            <h2>{{ product.name }}</h2>
+            <p>Price: {{ product.price }}$</p>
+            <!-- Display other product details as needed -->
+        </div>
+    </a>
+    {% endfor %}
 </div>
 {% endblock %}

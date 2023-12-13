@@ -1,0 +1,60 @@
+{% extends 'main_page/main.html' %}
+{% block content %}
+<div class="content">
+    <div class="product-product-photo">
+        <img src="{{ product.photo.url }}" alt="{{ product.name }} Photo" class="product-personal-photo">
+    </div>
+    <div class="product-product-info">
+        <h1>{{ product.name }}</h1>
+        <h4>{{ product.price }}$</h4>
+        <h6>Available: {{ product.available_quantity }}</h7>
+        <h6>Category: {{ product.category }}</h7>
+    </div>
+    <div class="product-product-review">
+        <div class="product-product-reviews">
+            {% if rating_count > 5 %}
+            {% for review in product.ProductReviews.all|slice:":5" %}
+            <div class="product-product-review-item">
+                <div class="product-product-review-user">
+                    <img src="{{ review.user.photo.url }}" alt="{{ review.user.username }} Photo" class="product-product-review-user-photo">
+                    <h4 class="product-product-review-user-username">{{ review.user.username }}</h4>
+                </div>
+                <div class="product-product-review-textzone">
+                    <p class="product-product-review-rate">{{ review.stars }}
+                    <p class="product-product-review-text">{{ review.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% elif rating_count == 0 %}
+            <div class="product-product-review-empty">
+                <p class="product-product-review-empty-text">No reviews yet</p>
+            </div>
+            {% else %}
+            {% for review in product.ProductReviews.all %}
+            <div class="product-product-review-item">
+                <div class="product-product-review-user">
+                    <p class="product-product-review-user-photo">photo</p>
+                    <p class="product-product-review-user-username">user</p>
+                    {% comment %} <img src="{{ review.user.photo.url }}" alt="{{ review.user.username }} Photo" class="product-product-review-user-photo">
+                    <h4 class="product-product-review-user-username">{{ review.user.username }}</h4> {% endcomment %}
+                </div>
+                <div class="product-product-review-textzone">
+                    <p class="product-product-review-rate">{{ review.stars }}
+                    <p class="product-product-review-text">{{ review.review }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        
+        {% if product.average_rating != 0 %}
+        <div class="product-product-score">
+            <h2>Rating:</h2>
+            <h1>{{ product.average_rating }}</h1>
+        </div>
+        {% endif %}
+    </div>
+    <div class="product-product-description">{{ product.description }}</div>
+    {% comment %} <div class="product-product-description">{{ product.description }}</div> {% endcomment %}
+</div>
+{% endblock %}

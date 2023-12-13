@@ -10,29 +10,49 @@
 </head>
 <body>
     <aside class = "main_head">
-        <a href=""><img src="{% static 'img/logo.png' %}" width="80%" alt="" style="margin-left: 7%; border-bottom: solid 3px"></a>
+        <a href="/"><img src="{% static 'img/logo.png' %}" width="80%" alt="" style="margin-left: 7%; border-bottom: solid 3px;text-decoration:none;"></a>
         <h1 class = "main" style = 'border: none; margin-top: 3%; margin-bottom: 10%; '>E-Store</h1>
-        <a href="main.com"><p class = "main">Home</p></a>
+        <a href="main.com" style='text-decoration:none;'><p class = "main">Home</p></a>
         <br>
-        <a href="items.com"><p class = "main" >Products</p></a>
+        <a href="items.com" style='text-decoration:none;'><p class = "main" >Products</p></a>
         <br>
-        <a href="categories.com"><p class = "main">Categories</p></a>
+        <a href="categories.com" style='text-decoration:none;'><p class = "main">Categories</p></a>
         <br>
-        <a href="about_us.com"><p class = "main">About us</p></a>
+        <a href="about_us.com" style='text-decoration:none;'><p class = "main">About us</p></a>
     </aside>
-    <div class="searchbar">
-        <input type="value" placeholder="Search.." class="search-bar">
-        <button class="btn-search" id="search" onclick="define()">Search</button>
-    </div>
-    <select class="selector" id="sort-by" name="sort">
-        <option value="name-ascend">Name (ascending)</option>
-        <option value="name-descend">Name (descending)</option>
-        <option value="price-ascend">Price (ascending)</option>
-        <option value="price-descend">Price (ascending)</option>
-    </select>
-    <a href="register.com">
-        <img src="{% static 'img/register.png' %}" alt="Register" class="btn-register">
-    </a>
+    <header class="header">
+        <div class="searchbar">
+            {% comment %} <input type="value" placeholder="Search.." class="search-bar"> {% endcomment %}
+            <div class="search-bar">
+                <input type="text" placeholder="Search.." class="search-bar-bar">
+                <button class="btn-search" id="search" onclick="define('working search')">Search</button>
+            </div>
+        </div>
+        <select class="selector" id="sort-by" name="sort">
+            <option value="name-ascend">Name (ascending)</option>
+            <option value="name-descend">Name (descending)</option>
+            <option value="price-ascend">Price (ascending)</option>
+            <option value="price-descend">Price (ascending)</option>
+        </select>
+        <div class = "links-signup-login">
+            <a href="login" style="text-decoration:none;">
+                <img src="{% static 'img/login.png' %}" width="45%" class="login-signup">
+            </a>
+            <a href="signup" style="text-decoration:none;">
+                <img src="{% static 'img/signup.png' %}" width="45%" class="login-signup">
+            </a>
+        </div>
+        <div class = "basket">
+            <button class="btn-basket" onclick="define('working basket')">
+                <img src="{% static 'img/basket.png' %}" alt="basket" class="basket-icon">
+            </button>
+        </div>
+        <div class = "filter">
+            <button class="btn-filter" onclick="define('working filter')">
+                <img src="{% static 'img/filter.png' %}" alt="filter" class="filter-icon">
+            </button>
+        </div>
+    </header>
     {% block content %}
     {% endblock %}
     {% comment %} <footer>
@@ -42,8 +62,8 @@
         </div>
     </footer> {% endcomment %}
     <script type="text/javascript">
-        function define() {
-            console.log("Working...");
+        function define(string) {
+            console.log(string);
         }
     </script>
 </body>

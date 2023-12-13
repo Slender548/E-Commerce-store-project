@@ -1,15 +1,17 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import Avg
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
+import datetime
 
 # Create your models here.
 
 class User(models.Model):
-    photo = models.ImageField(upload_to='Users', default = None)
+    photo = models.ImageField(upload_to='Users', blank=True, null=True)
     username = models.CharField(max_length=30)
     email = models.EmailField()
     password = models.CharField(max_length=30)
-    phone = models.CharField(max_length=20, null=True)
-    date_of_birth = models.DateField(null=True)
+    phone = models.CharField(max_length=20, null=True, blank=True, validators=[RegexValidator(regex=r'^\d{9,15}$', message="Enter a valid phone number")])
+    date_of_birth = models.DateField(null=True, blank=True)
     country = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=30, blank=True, null=True)
     street = models.CharField(max_length=30, blank=True, null=True)
@@ -22,20 +24,23 @@ class User(models.Model):
         return self.username
 
 class Product(models.Model):
-    seller = models.ForeignKey('Seller', on_delete=models.CASCADE, related_name="Products")
-    photos = models.ImageField(upload_to='Products')
+    seller = models.ForeignKey('Seller', on_delete=models.CASCADE, related_name="Products", default=None)
+    photo = models.ImageField(upload_to='Products')
     name = models.CharField(max_length=30)
     description = models.TextField()
-    price = models.DecimalField(max_digits=12, decimal_places=2)
+    price = models.DecimalField(max_digits=12, decimal_places=2, validators=[MinValueValidator(1)])
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="Products")
     available_quantity = models.IntegerField(default=0)
     added_on = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name
+    def average_rating(self):
+        # Calculate the average rating using Django's aggregation functions
+        average = self.ProductReviews.aggregate(Avg('stars'))['stars__avg']
+        return average or 0  # Return 0 if there are no reviews yet
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    subcategories = models.ManyToManyField('Subcategories', related_name='Category')
     def __str__(self):
         return self.name
 
@@ -47,6 +52,7 @@ class Basket(models.Model):
         return self.sum
 
 class Subcategories(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="Subcategories", default=None)
     name = models.CharField(max_length=30)
     def __str__(self):
         return self.name
@@ -56,7 +62,7 @@ class ProductReviews(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="ProductReviews")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ProductReviews")
     stars = models.IntegerField(default=0, validators=[MaxValueValidator(5), MinValueValidator(1)])
-    photos = models.ImageField(upload_to='ProductReviews', max_length=10)
+    photos = models.ImageField(upload_to='ProductReviews', blank=True, null=True)
     likes = models.IntegerField(default=0)
     review = models.TextField()
 
@@ -71,10 +77,10 @@ class Seller(models.Model):
     addresses = models.ManyToManyField('Address', related_name="SellerAddresses")
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    reviews = models.ManyToManyField(ProductReviews, related_name='Seller')
+    reviews = models.ManyToManyField(ProductReviews, related_name='Seller', null=True, blank=True)
     date_of_birth = models.DateField()
     def __str__(self):
-        return self.user
+        return self.name
 
 class Address(models.Model):
     country = models.CharField(max_length=30)

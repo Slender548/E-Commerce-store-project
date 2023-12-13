@@ -1,16 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
 html {
-    background-color: rgb(151, 145, 145);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .main {
     font-size: 25px;
     margin-bottom: -5px;
     text-align: center;
-    border: solid 1.6px rgb(0, 0, 0);
+    border: solid 1.6px #CCCCCC;
     border-radius: 9px;
     color: white;
     margin-right: 2%;
     margin-left: 0%;
+    color: #333333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main:hover {
+    transform: scale(1.1);
 }
 
 .main_head {
@@ -22,53 +30,247 @@ html {
     border-radius: 10px;
     width: 20%;
     height: 1000vh;
-    border-right: 3px solid #000;
-    border-bottom: 3px solid #000;
+    border-right: 3px solid #CCCCCC;
+    border-bottom: 3px solid #CCCCCC;
     box-sizing: border-box;
     position: fixed;
+    top: 0;
+    transition: transform 0.4s ease;
+}
+
+.header {
+    right: 0;
+    top: 0;
+    width: 79.7%;
+    height: 12%;
+    position: fixed;
+    border-bottom: solid 3px #CCCCCC;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .searchbar {
     transform: translate(100%, 0px);
     width: 35%;
-    height: 2.5em;
+    height: 3em;
     position: sticky;
-    top: 0;
+    top: 13px;
     margin: 0;
     padding: 0;
 }
 
 .search-bar {
-    width: 100%;
-    height: 100%;
+    width: 115%;
+    height: 130%;
     position: absolute;
-    border-radius: 10px;
-    border: 3px solid #000;
+    border-radius: 15px;
+    border: 3px solid #CCCCCC;
+    right: -8px;
+}
+
+.search-bar-bar {
+    border: none;
+    width: 84%;
+    height: 98%;
+    border-radius: 15px;
     font: 3em sans-serif;
 }
 
 .btn-search {
     z-index: 9;
-    transform: translate(830%, 10px);
-    margin: 0;
     border-radius: 19%;
-    height: 2.4em;
-    border: solid 2.3px;
-    font: 13.4px sans-serif;
+    border: solid 2.3px #CCCCCC;
+    font: 1.4em sans-serif;
+    width: 14%;
+    height: 90%;
+    transform: translate(0, -15%);
 }
 
 .selector {
-    border: rgb(0, 0, 0) solid 3px;
+    border: #CCCCCC solid 3px;
     border-radius: 10px;
     width: 15%;
-    height: 5%;
     position: fixed;
-    font: 1.5em sans-serif;
-    right: 14%;
-    top: 2%;
+    font: 2em sans-serif;
+    right: 8.2%;
+    top: 3%;
 }
 
-.btn-register {
-    right: 1%;
-    top: 38%;
+.links-signup-login {
+    float: right;
+    width: 10%;
+    height: 60%;
+    transform: translate(0, -60%);
+}
+
+.login-signup {
+    border: dashed 2px #CCCCCC;
+    border-radius: 7px;
+    transition: transform 0.4s ease;
+    cursor: default;
+}
+
+.login-signup:hover {
+    transform: scale(1.1);
+}
+
+.filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0px;
+    float: left;
+    margin-left: 2%;
+    margin-top: 0.1%;
+    transition: transform 0.4s ease;
+}
+
+.filter:hover {
+    transform: scale(1.1);
+}
+
+.btn-filter {
+    border: dashed 2px #CCCCCC;
+    border-radius: 7px;
+    background-color: transparent;
+    width: 80px;
+    height: 80px;
+}
+
+.filter-icon {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.basket {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0px;
+    float: left;
+    margin-left: 2%;
+    margin-top: 0.1%;
+    transition: transform 0.4s ease;
+}
+
+.basket:hover {
+    transform: scale(1.1);
+}
+
+.btn-basket {
+    border: dashed 2px #CCCCCC;
+    border-radius: 7px;
+    background-color: transparent;
+    width: 80px;
+    height: 80px;
+    transition: transform 0.4s ease
+}
+
+.basket-icon {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.content {
+    float: right;
+    width: 79%;
+    margin-top: 5%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-photo {
+    border-radius: 5%;
+    margin-top: 5%;
+    max-width: 95%;
+    max-height: 50%;
+}
+
+.product-content {
+    border: solid 3px #CCCCCC;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.product-personal-photo {
+    border: solid 5px #CCCCCC;
+    border-radius: 10%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.product-product-photo {
+    margin: 0.5%;
+    max-width: 40%;
+}
+
+.product-product-info {
+    width: 59%;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+}
+
+.product-product-description {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em;
+    height: 30%;
+    width: 49%;
+    border: 3px solid #CCCCCC;
+    border-radius: 10px;
+}
+
+.product-product-review {
+    width: 50%;
+    height: 70%;
+    border: solid 5px #CCCCCC;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+.product-product-reviews {
+    width: 100%;
+    height: 100%;
+}
+
+.product-product-review-item {
+    width: 100%;
+    height: 30%;
+}
+
+.product-product-review-user {
+    width: 50%;
+    height: 10%;
+}
+
+.product-product-review-user-photo {
+    width: 50%;
+    height: 100%;
+}
+
+.product-product-review-user-username {
+    width: 50%;
+    height: 100%;
+}
+
+.product-product-review-textzone {
+    width: 100%;
+    height: 90%;
+}
+
+.product-product-review-rate {
+    width: 5%;
+    height: 100%;
+}
+
+.product-product-review-text {
+    width: 95%;
+    height: 100%;
 }
